@@ -1,5 +1,6 @@
-package com.springboot;
+package dev.polaris;
 
+import com.springboot.RedisCacheApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,8 @@ import com.springboot.bean.Student;
 import com.springboot.service.StudentService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Application.class)
-public class ApplicationTest {
+@SpringBootTest(classes = RedisCacheApplication.class)
+public class RedisCacheApplicationTest {
 
 	@Autowired
 	private StudentService studentService;
@@ -32,7 +33,11 @@ public class ApplicationTest {
 
 		student1.setName("康康");
 		this.studentService.update(student1);
-		
+
+		/*
+		* 这里仍然会从数据库中查询，其原因是缓存未命中
+		* update方法使用的是@CachePut(key = "#p0.sno")作为缓存key
+		* */
 		Student student2 = this.studentService.queryStudentBySno("001");
 		System.out.println("学号" + student2.getSno() + "的学生姓名为：" + student2.getName());
 	}

@@ -10,6 +10,12 @@ import org.springframework.cache.annotation.CacheConfig;
 
 import com.springboot.bean.Student;
 
+/**
+ * 它 不会跨类生效，也就是说：
+ * 在 StudentService 上写的 @CacheConfig 只对 StudentService 生效；
+ * 在 StudentMapper 上写的 @CacheConfig 只对 StudentMapper 生效。
+ * 如果没有在 StudentMapper 上使用任何缓存注解如@Cacheable，那这个 @CacheConfig 目前其实并没有实际作用，可以删除。
+ * */
 @Mapper
 @CacheConfig(cacheNames = "student")
 public interface StudentMapper {
