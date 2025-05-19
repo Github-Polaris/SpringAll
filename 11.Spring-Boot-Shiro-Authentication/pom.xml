@@ -8,8 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Spring-Boot-Shiro-Authentication</name>
+	<description>Spring-Boot-Shiro-Authentication project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -50,14 +50,7 @@
 		    <version>1.4.0</version>
 		</dependency>
 		
-		
-		<!-- oracle驱动 -->
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>6.0</version>
-		</dependency>
-		
+
 		<!-- druid数据源驱动 -->
 		<dependency>
 		   <groupId>com.alibaba</groupId>

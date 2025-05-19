@@ -8,8 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Spring-Boot-admin-Client</name>
+	<description>Spring-Boot-admin-Client project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
