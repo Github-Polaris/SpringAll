@@ -1,7 +1,6 @@
 package cc.mrbird.security.browser;
 
 import cc.mrbird.domain.MyUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -13,8 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class UserDetailService implements UserDetailsService {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserDetailService(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
