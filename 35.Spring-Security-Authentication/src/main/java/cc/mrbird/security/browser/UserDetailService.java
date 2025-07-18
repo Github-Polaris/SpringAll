@@ -1,7 +1,6 @@
 package cc.mrbird.security.browser;
 
 import cc.mrbird.domain.MyUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -13,8 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class UserDetailService implements UserDetailsService {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserDetailService(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -22,11 +24,18 @@ public class UserDetailService implements UserDetailsService {
         MyUser user = new MyUser();
         user.setUserName(username);
         user.setPassword(this.passwordEncoder.encode("123456"));
-        // 输出加密后的密码
+        /*
+        * 为什么每次输出的加密密码不一样？
+        * 加密时会自动加入一个 随机盐值（salt）
+        * */
         System.out.println(user.getPassword());
 
-        return new User(username, user.getPassword(), user.isEnabled(),
-                user.isAccountNonExpired(), user.isCredentialsNonExpired(),
-                user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        return new User(username,
+                user.getPassword(),
+                user.isEnabled(),
+                user.isAccountNonExpired(),
+                user.isCredentialsNonExpired(),
+                user.isAccountNonLocked(),
+                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }
